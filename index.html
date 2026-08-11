@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student Career Toolkit</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#24324a}
+header{background:linear-gradient(135deg,#1769e0,#3f8cff);color:#fff;text-align:center;padding:35px 15px}
+nav{background:#fff;text-align:center;padding:15px;position:sticky;top:0;box-shadow:0 2px 8px #0001;z-index:2}nav a{margin:0 12px;color:#24324a;text-decoration:none;font-weight:bold}
+section{max-width:1100px;margin:30px auto;padding:20px}.hero{text-align:center;padding:55px 15px}.hero h2{color:#1556b8;font-size:34px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card,.box{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 12px #0001}
+.btn{background:#1769e0;color:#fff;border:0;border-radius:7px;padding:11px 18px;font-weight:bold;cursor:pointer}
+.resume{display:grid;grid-template-columns:1fr 1fr;gap:22px}label{display:block;font-weight:bold;margin:10px 0 5px}
+input,textarea{width:100%;padding:10px;border:1px solid #ccd5e2;border-radius:6px;font:inherit}textarea{min-height:80px}
+.cv h1{color:#1556b8;margin-bottom:4px}.cv h2{font-size:18px;color:#1556b8;border-bottom:2px solid #1769e0;padding-bottom:4px}.cv p{white-space:pre-line;line-height:1.5}.small{color:#687386;font-size:13px}
+footer{text-align:center;background:#17243a;color:#fff;padding:25px}
+@media(max-width:800px){.resume{grid-template-columns:1fr}}@media print{nav,header,.hero,#tools,#interview,#tips,footer,.form,.small{display:none!important}body{background:#fff}.resume{display:block}.box{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><h1>🎓 Student Career Toolkit</h1><p>Useful tools and resources for students and freshers</p></header>
+<nav><a href="#home">Home</a><a href="#tools">Career Tools</a><a href="#resume">Resume Maker</a><a href="#interview">Interview</a><a href="#tips">Career Tips</a></nav>
+
+<section id="home" class="hero"><h2>Build Your Career With Confidence 🚀</h2>
+<p>A simple toolkit for internships, jobs, resumes and interviews.</p>
+<a href="#resume"><button class="btn">Create Your Resume</button></a></section>
+
+<section id="tools"><h2>🛠️ Career Tools</h2><div class="cards">
+<div class="card"><h3>📄 Resume Maker</h3><p>Create and print a professional student resume.</p><a href="#resume"><button class="btn">Make Resume</button></a></div>
+<div class="card"><h3>💼 Job Preparation</h3><p>Prepare your skills and applications.</p></div>
+<div class="card"><h3>🎤 Interview Preparation</h3><p>Practice common interview questions.</p></div>
+<div class="card"><h3>📚 Skill Development</h3><p>Build Excel, communication and data skills.</p></div>
+</div></section>
+
+<section id="resume"><h2>📄 Resume Maker</h2><p class="small">Fill in the form. The preview updates automatically. Use Print / Save as PDF when finished.</p>
+<div class="resume">
+<div class="box form">
+<label>Full Name</label><input id="name" placeholder="Your name">
+<label>Email</label><input id="email" placeholder="yourname@gmail.com">
+<label>Phone</label><input id="phone" placeholder="+91 XXXXX XXXXX">
+<label>Location</label><input id="location" placeholder="Kolkata, India">
+<label>Career Objective</label><textarea id="objective"></textarea>
+<label>Education</label><textarea id="education" placeholder="BBA — University&#10;Year: 2026"></textarea>
+<label>Skills</label><textarea id="skills" placeholder="MS Excel&#10;Communication&#10;Data Analysis"></textarea>
+<label>Experience / Internship</label><textarea id="experience"></textarea>
+<label>Projects</label><textarea id="projects"></textarea>
+<label>Certifications</label><textarea id="certifications"></textarea>
+<label>Languages</label><input id="languages" placeholder="English, Hindi, Bengali">
+<br><br><button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+<div class="box"><div class="cv">
+<h1 id="pname">Your Name</h1><div id="pcontact">Email • Phone • Location</div>
+<h2>Career Objective</h2><p id="pobjective">Not provided</p>
+<h2>Education</h2><p id="peducation">Not provided</p>
+<h2>Skills</h2><p id="pskills">Not provided</p>
+<h2>Experience / Internship</h2><p id="pexperience">Not provided</p>
+<h2>Projects</h2><p id="pprojects">Not provided</p>
+<h2>Certifications</h2><p id="pcertifications">Not provided</p>
+<h2>Languages</h2><p id="planguages">Not provided</p>
+</div></div></div></section>
+
+<section id="interview"><h2>🎤 Interview Preparation</h2><div class="cards">
+<div class="card"><h3>Tell me about yourself</h3><p>Prepare a short introduction about your education, skills and goals.</p></div>
+<div class="card"><h3>Why should we hire you?</h3><p>Explain your relevant skills and willingness to learn.</p></div>
+<div class="card"><h3>What are your strengths?</h3><p>Choose genuine strengths and give examples.</p></div>
+</div></section>
+<section id="tips"><h2>💡 Career Tips</h2><div class="cards">
+<div class="card"><h3>Keep your resume simple</h3><p>Use clear headings and information relevant to the role.</p></div>
+<div class="card"><h3>Build practical skills</h3><p>Practice Excel, communication and data analysis.</p></div>
+<div class="card"><h3>Prepare before applying</h3><p>Read the job description and highlight matching skills.</p></div>
+</div></section>
+<footer>© 2026 Student Career Toolkit</footer>
+<script>
+const ids=["name","email","phone","location","objective","education","skills","experience","projects","certifications","languages"];
+function update(){
+ document.getElementById("pname").textContent=document.getElementById("name").value||"Your Name";
+ document.getElementById("pcontact").textContent=[email.value,phone.value,location.value].filter(Boolean).join(" • ")||"Email • Phone • Location";
+ ids.slice(4).forEach(id=>document.getElementById("p"+id).textContent=document.getElementById(id).value||"Not provided");
+}
+ids.forEach(id=>document.getElementById(id).addEventListener("input",update));update();
+</script>
+</body></html>
