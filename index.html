@@ -5,79 +5,373 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Student Career Toolkit</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#24324a}
-header{background:linear-gradient(135deg,#1769e0,#3f8cff);color:#fff;text-align:center;padding:35px 15px}
-nav{background:#fff;text-align:center;padding:15px;position:sticky;top:0;box-shadow:0 2px 8px #0001;z-index:2}nav a{margin:0 12px;color:#24324a;text-decoration:none;font-weight:bold}
-section{max-width:1100px;margin:30px auto;padding:20px}.hero{text-align:center;padding:55px 15px}.hero h2{color:#1556b8;font-size:34px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card,.box{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 12px #0001}
-.btn{background:#1769e0;color:#fff;border:0;border-radius:7px;padding:11px 18px;font-weight:bold;cursor:pointer}
-.resume{display:grid;grid-template-columns:1fr 1fr;gap:22px}label{display:block;font-weight:bold;margin:10px 0 5px}
-input,textarea{width:100%;padding:10px;border:1px solid #ccd5e2;border-radius:6px;font:inherit}textarea{min-height:80px}
-.cv h1{color:#1556b8;margin-bottom:4px}.cv h2{font-size:18px;color:#1556b8;border-bottom:2px solid #1769e0;padding-bottom:4px}.cv p{white-space:pre-line;line-height:1.5}.small{color:#687386;font-size:13px}
-footer{text-align:center;background:#17243a;color:#fff;padding:25px}
-@media(max-width:800px){.resume{grid-template-columns:1fr}}@media print{nav,header,.hero,#tools,#interview,#tips,footer,.form,.small{display:none!important}body{background:#fff}.resume{display:block}.box{box-shadow:none}}
+:root{
+  --primary:#2563eb;--primary2:#7c3aed;--dark:#172033;--text:#26344d;
+  --muted:#64748b;--bg:#f5f7fb;--card:#fff;--line:#e2e8f0;--soft:#eef4ff;
+  --success:#0f9d58;--warning:#b45309;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,#1d4ed8,#6d28d9);color:#fff;padding:48px 18px;text-align:center}
+header h1{font-size:38px;margin:0 0 8px}
+header p{margin:0;opacity:.92;font-size:17px}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:12px;border-bottom:1px solid var(--line);box-shadow:0 3px 15px #00000010}
+nav a{color:var(--dark);text-decoration:none;font-weight:700;padding:9px 12px;border-radius:9px;font-size:14px}
+nav a:hover{background:var(--soft);color:var(--primary)}
+section{max-width:1150px;margin:0 auto;padding:38px 18px}
+.hero{text-align:center;padding:70px 18px 55px}
+.hero h2{font-size:42px;line-height:1.15;margin:0 auto 14px;color:#173b8f}
+.hero p{max-width:720px;margin:0 auto 25px;color:var(--muted);font-size:17px}
+.btn{display:inline-block;border:0;border-radius:10px;padding:12px 18px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800;cursor:pointer;text-decoration:none;box-shadow:0 5px 14px #2563eb30}
+.btn.secondary{background:#fff;color:var(--primary);border:1px solid #cbd5e1;box-shadow:none}
+.btn.small{padding:8px 12px;font-size:13px}
+h2.section-title{font-size:29px;margin:0 0 7px;color:var(--dark)}
+.section-sub{margin:0 0 22px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px}
+.card,.box{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 8px 24px #0f172a0b}
+.card{transition:.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px #0f172a12}
+.card h3{margin:0 0 8px;color:#183b82}
+.card p{margin:0;color:var(--muted)}
+.badge{display:inline-block;background:var(--soft);color:var(--primary);padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800;margin-bottom:10px}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.feature strong{display:block;font-size:17px;margin-bottom:5px}
+.resume-layout{display:grid;grid-template-columns:minmax(330px,1fr) minmax(330px,1fr);gap:22px;align-items:start}
+.form-section{border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;background:#fbfdff}
+.form-section h3{margin:0 0 12px;color:#173b8f}
+label{display:block;font-weight:700;margin:10px 0 5px;font-size:14px}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;background:#fff;color:var(--text)}
+textarea{min-height:80px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.helper{font-size:12px;color:var(--muted);margin-top:4px}
+.cv-wrap{position:sticky;top:76px}
+.cv{background:#fff;border:1px solid #d9e0ea;min-height:780px;padding:34px;box-shadow:0 12px 30px #0f172a12}
+.cv h1{font-size:31px;margin:0;color:#173b8f}
+.cv .headline{font-weight:700;color:#475569;margin:2px 0 7px}
+.cv .contact{font-size:13px;color:#64748b;border-bottom:2px solid #2563eb;padding-bottom:12px}
+.cv h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:#173b8f;border-bottom:1px solid #cbd5e1;padding-bottom:4px;margin:20px 0 7px}
+.cv p,.cv div{font-size:13px}
+.cv p{white-space:pre-line;margin:5px 0}
+.cv .skills{white-space:pre-line}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.calc{margin:18px 0}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.result{margin-top:15px;padding:14px;border-radius:11px;background:#eef6ff;border:1px solid #cfe0ff;font-weight:800;color:#174ea6}
+.result.good{background:#effaf3;border-color:#c8ecd8;color:#087443}
+details{background:#fff;border:1px solid var(--line);border-radius:13px;margin:10px 0;padding:0 15px}
+summary{cursor:pointer;font-weight:800;padding:15px 3px;color:#173b8f}
+details p,details ul{color:var(--muted);margin-top:0}
+ul{padding-left:20px}
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.tip{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}
+.tip h3{margin:0 0 6px;color:#173b8f;font-size:17px}
+.tip p{margin:0;color:var(--muted)}
+.note{padding:14px 16px;background:#fff9eb;border:1px solid #fde7b0;border-radius:12px;color:#7c4a03}
+footer{background:#172033;color:#fff;text-align:center;padding:28px;margin-top:20px}
+@media(max-width:850px){
+ .resume-layout{grid-template-columns:1fr}.cv-wrap{position:static}.hero h2{font-size:33px}
+ .two{grid-template-columns:1fr}
+}
+@media print{
+ nav,header,.hero,#tools,#calculators,#jobprep,#interview,#skills,#tips,footer,.form-panel,.actions,.section-sub,.note{display:none!important}
+ body{background:#fff}.resume-layout{display:block}.cv-wrap{position:static}.cv{box-shadow:none;border:0;padding:25px;min-height:0}
+}
 </style>
 </head>
 <body>
-<header><h1>🎓 Student Career Toolkit</h1><p>Useful tools and resources for students and freshers</p></header>
-<nav><a href="#home">Home</a><a href="#tools">Career Tools</a><a href="#resume">Resume Maker</a><a href="#interview">Interview</a><a href="#tips">Career Tips</a></nav>
 
-<section id="home" class="hero"><h2>Build Your Career With Confidence 🚀</h2>
-<p>A simple toolkit for internships, jobs, resumes and interviews.</p>
-<a href="#resume"><button class="btn">Create Your Resume</button></a></section>
+<header>
+  <h1>🎓 Student Career Toolkit</h1>
+  <p>Practical tools, resume help, interview practice and career guidance for students & freshers</p>
+</header>
 
-<section id="tools"><h2>🛠️ Career Tools</h2><div class="cards">
-<div class="card"><h3>📄 Resume Maker</h3><p>Create and print a professional student resume.</p><a href="#resume"><button class="btn">Make Resume</button></a></div>
-<div class="card"><h3>💼 Job Preparation</h3><p>Prepare your skills and applications.</p></div>
-<div class="card"><h3>🎤 Interview Preparation</h3><p>Practice common interview questions.</p></div>
-<div class="card"><h3>📚 Skill Development</h3><p>Build Excel, communication and data skills.</p></div>
-</div></section>
+<nav>
+  <a href="#home">Home</a>
+  <a href="#tools">Career Tools</a>
+  <a href="#resume">Resume Maker</a>
+  <a href="#calculators">Calculators</a>
+  <a href="#jobprep">Job Preparation</a>
+  <a href="#interview">Interview</a>
+  <a href="#skills">Skills</a>
+  <a href="#tips">Tips</a>
+</nav>
 
-<section id="resume"><h2>📄 Resume Maker</h2><p class="small">Fill in the form. The preview updates automatically. Use Print / Save as PDF when finished.</p>
-<div class="resume">
-<div class="box form">
-<label>Full Name</label><input id="name" placeholder="Your name">
-<label>Email</label><input id="email" placeholder="yourname@gmail.com">
-<label>Phone</label><input id="phone" placeholder="+91 XXXXX XXXXX">
-<label>Location</label><input id="location" placeholder="Kolkata, India">
-<label>Career Objective</label><textarea id="objective"></textarea>
-<label>Education</label><textarea id="education" placeholder="BBA — University&#10;Year: 2026"></textarea>
-<label>Skills</label><textarea id="skills" placeholder="MS Excel&#10;Communication&#10;Data Analysis"></textarea>
-<label>Experience / Internship</label><textarea id="experience"></textarea>
-<label>Projects</label><textarea id="projects"></textarea>
-<label>Certifications</label><textarea id="certifications"></textarea>
-<label>Languages</label><input id="languages" placeholder="English, Hindi, Bengali">
-<br><br><button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
-</div>
-<div class="box"><div class="cv">
-<h1 id="pname">Your Name</h1><div id="pcontact">Email • Phone • Location</div>
-<h2>Career Objective</h2><p id="pobjective">Not provided</p>
-<h2>Education</h2><p id="peducation">Not provided</p>
-<h2>Skills</h2><p id="pskills">Not provided</p>
-<h2>Experience / Internship</h2><p id="pexperience">Not provided</p>
-<h2>Projects</h2><p id="pprojects">Not provided</p>
-<h2>Certifications</h2><p id="pcertifications">Not provided</p>
-<h2>Languages</h2><p id="planguages">Not provided</p>
-</div></div></div></section>
+<section id="home" class="hero">
+  <span class="badge">STUDENT-FRIENDLY • FREE TO USE</span>
+  <h2>Build Your Career With Confidence 🚀</h2>
+  <p>Create a clean resume, calculate your CGPA and attendance, prepare for jobs and interviews, and learn practical skills — all in one place.</p>
+  <a class="btn" href="#resume">📄 Create My Resume</a>
+  <a class="btn secondary" href="#tools">Explore Tools</a>
+</section>
 
-<section id="interview"><h2>🎤 Interview Preparation</h2><div class="cards">
-<div class="card"><h3>Tell me about yourself</h3><p>Prepare a short introduction about your education, skills and goals.</p></div>
-<div class="card"><h3>Why should we hire you?</h3><p>Explain your relevant skills and willingness to learn.</p></div>
-<div class="card"><h3>What are your strengths?</h3><p>Choose genuine strengths and give examples.</p></div>
-</div></section>
-<section id="tips"><h2>💡 Career Tips</h2><div class="cards">
-<div class="card"><h3>Keep your resume simple</h3><p>Use clear headings and information relevant to the role.</p></div>
-<div class="card"><h3>Build practical skills</h3><p>Practice Excel, communication and data analysis.</p></div>
-<div class="card"><h3>Prepare before applying</h3><p>Read the job description and highlight matching skills.</p></div>
-</div></section>
-<footer>© 2026 Student Career Toolkit</footer>
+<section id="tools">
+  <h2 class="section-title">🛠️ Career Tools</h2>
+  <p class="section-sub">Useful tools you can use while studying, applying for internships or preparing for your first job.</p>
+  <div class="cards">
+    <div class="card"><span class="badge">CAREER</span><h3>📄 Resume Maker</h3><p>Create a professional, student-friendly resume and print/save it as PDF.</p><br><a class="btn small" href="#resume">Open</a></div>
+    <div class="card"><span class="badge">STUDY</span><h3>📘 CGPA Calculator</h3><p>Enter semester GPAs to calculate your average CGPA.</p><br><a class="btn small" href="#cgpa">Open</a></div>
+    <div class="card"><span class="badge">ATTENDANCE</span><h3>📊 Attendance Calculator</h3><p>Check your current attendance and classes needed to reach a target.</p><br><a class="btn small" href="#attendance">Open</a></div>
+    <div class="card"><span class="badge">JOB</span><h3>💼 Job Preparation</h3><p>Learn how to search, apply, track applications and prepare documents.</p><br><a class="btn small" href="#jobprep">Learn</a></div>
+    <div class="card"><span class="badge">INTERVIEW</span><h3>🎤 Interview Preparation</h3><p>Practice HR, fresher, behavioral and role-based questions.</p><br><a class="btn small" href="#interview">Practice</a></div>
+    <div class="card"><span class="badge">SKILLS</span><h3>📚 Skill Development</h3><p>Follow practical learning ideas for Excel, communication, data and business skills.</p><br><a class="btn small" href="#skills">Explore</a></div>
+  </div>
+</section>
+
+<section id="resume">
+  <h2 class="section-title">📄 Professional Resume Maker</h2>
+  <p class="section-sub">Fill only the sections you need. The preview updates automatically. Keep your resume clear, truthful and relevant to the job.</p>
+  <div class="resume-layout">
+    <div class="box form-panel">
+      <div class="form-section">
+        <h3>👤 Personal Information</h3>
+        <div class="two">
+          <div><label>Full Name</label><input id="name" placeholder="Your full name"></div>
+          <div><label>Professional Title</label><input id="headline" placeholder="BBA Student | Aspiring HR Professional"></div>
+        </div>
+        <div class="two">
+          <div><label>Email</label><input id="email" type="email" placeholder="yourname@gmail.com"></div>
+          <div><label>Phone</label><input id="phone" placeholder="+91 XXXXX XXXXX"></div>
+        </div>
+        <div class="two">
+          <div><label>Location</label><input id="location" placeholder="Kolkata, India"></div>
+          <div><label>LinkedIn / Portfolio</label><input id="linkedin" placeholder="linkedin.com/in/yourname"></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>🎯 Profile / Career Objective</h3>
+        <label>Short Professional Summary</label>
+        <textarea id="objective" placeholder="Example: BBA student with strong communication and MS Excel skills, seeking an internship opportunity to apply business knowledge and gain practical experience."></textarea>
+        <div class="helper">Tip: 2–4 lines are usually enough for a fresher.</div>
+      </div>
+
+      <div class="form-section">
+        <h3>🎓 Education</h3>
+        <label>Education Details</label>
+        <textarea id="education" placeholder="BBA — Amity University Kolkata&#10;2023–2026 | CGPA: 8.2&#10;&#10;Class XII — School Name | 2023 | 82%"></textarea>
+      </div>
+
+      <div class="form-section">
+        <h3>💼 Experience / Internship</h3>
+        <label>Experience Details</label>
+        <textarea id="experience" placeholder="HR Intern — Company Name | Jun 2026–Jul 2026&#10;• Assisted with candidate records and Excel sheets&#10;• Supported basic recruitment tasks"></textarea>
+        <div class="helper">No experience? Write “Fresher” or focus on projects, coursework and skills.</div>
+      </div>
+
+      <div class="form-section">
+        <h3>🧩 Skills</h3>
+        <label>Technical & Soft Skills</label>
+        <textarea id="skills" placeholder="MS Excel&#10;MS Word & PowerPoint&#10;Communication&#10;Teamwork&#10;Data Analysis&#10;Problem Solving"></textarea>
+      </div>
+
+      <div class="form-section">
+        <h3>🚀 Projects</h3>
+        <label>Academic / Personal Projects</label>
+        <textarea id="projects" placeholder="Student Entertainment Preferences Survey&#10;• Collected and analyzed responses from college students&#10;• Presented findings using charts"></textarea>
+      </div>
+
+      <div class="form-section">
+        <h3>🏆 Certifications & Achievements</h3>
+        <label>Certifications / Achievements</label>
+        <textarea id="certifications" placeholder="Advanced MS Excel — Course Provider, 2026&#10;Certificate of Participation — College Event"></textarea>
+      </div>
+
+      <div class="form-section">
+        <h3>🌐 Languages & Activities</h3>
+        <div class="two">
+          <div><label>Languages</label><input id="languages" placeholder="English, Hindi, Bengali"></div>
+          <div><label>Interests / Activities</label><input id="activities" placeholder="Content creation, volunteering"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="btn secondary" onclick="clearResume()">🧹 Clear Form</button>
+      </div>
+    </div>
+
+    <div class="cv-wrap">
+      <div class="cv" id="cv">
+        <h1 id="pname">Your Name</h1>
+        <div class="headline" id="pheadline">Student / Aspiring Professional</div>
+        <div class="contact" id="pcontact">Email • Phone • Location</div>
+        <h2>Profile</h2><p id="pobjective">Add your professional summary.</p>
+        <h2>Education</h2><p id="peducation">Add your education.</p>
+        <h2>Experience / Internship</h2><p id="pexperience">Add experience or internship details.</p>
+        <h2>Skills</h2><p id="pskills">Add your skills.</p>
+        <h2>Projects</h2><p id="pprojects">Add projects.</p>
+        <h2>Certifications & Achievements</h2><p id="pcertifications">Add certificates or achievements.</p>
+        <h2>Languages</h2><p id="planguages">Add languages.</p>
+        <h2>Activities & Interests</h2><p id="pactivities">Add activities or interests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calculators">
+  <h2 class="section-title">🧮 Student Calculators</h2>
+  <p class="section-sub">Simple calculators for common student needs.</p>
+
+  <div id="cgpa" class="box calc">
+    <h3>📘 CGPA Calculator</h3>
+    <p class="section-sub">Enter your semester GPA values. Empty semesters are ignored.</p>
+    <div class="calc-grid">
+      <div><label>Semester 1 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.2"></div>
+      <div><label>Semester 2 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.4"></div>
+      <div><label>Semester 3 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.1"></div>
+      <div><label>Semester 4 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.6"></div>
+      <div><label>Semester 5 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.3"></div>
+      <div><label>Semester 6 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.5"></div>
+      <div><label>Semester 7 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.2"></div>
+      <div><label>Semester 8 GPA</label><input class="gpa" type="number" min="0" max="10" step=".01" placeholder="8.7"></div>
+    </div>
+    <br><button class="btn" onclick="calculateCGPA()">Calculate CGPA</button>
+    <div id="cgpaResult" class="result">Your CGPA will appear here.</div>
+    <p class="helper">This is a simple average. If your university uses credit-weighted CGPA, your official result may differ.</p>
+  </div>
+
+  <div id="attendance" class="box calc">
+    <h3>📊 Attendance Calculator</h3>
+    <p class="section-sub">Check current attendance and estimate how many consecutive classes you need to attend to reach your target.</p>
+    <div class="calc-grid">
+      <div><label>Classes Attended</label><input id="attended" type="number" min="0" placeholder="42"></div>
+      <div><label>Total Classes Held</label><input id="totalClasses" type="number" min="1" placeholder="50"></div>
+      <div><label>Target Attendance %</label><input id="targetAttendance" type="number" min="0" max="100" step=".1" value="75"></div>
+    </div>
+    <br><button class="btn" onclick="calculateAttendance()">Calculate Attendance</button>
+    <div id="attendanceResult" class="result">Your attendance result will appear here.</div>
+  </div>
+</section>
+
+<section id="jobprep">
+  <h2 class="section-title">💼 Job Preparation — Step by Step</h2>
+  <p class="section-sub">A simple checklist for students and freshers applying for internships or jobs.</p>
+  <div class="tip-grid">
+    <div class="tip"><h3>1️⃣ Decide What You Want</h3><p>Choose 1–3 target roles such as HR Intern, Business Analyst Intern, Sales Executive or Data Analyst Intern. This makes your applications more focused.</p></div>
+    <div class="tip"><h3>2️⃣ Prepare Your Resume</h3><p>Keep one master resume and customize the important skills, projects and keywords for each job.</p></div>
+    <div class="tip"><h3>3️⃣ Build a Job Profile</h3><p>Keep your LinkedIn and job-platform profiles complete with education, skills, projects and a professional photo if you choose to use one.</p></div>
+    <div class="tip"><h3>4️⃣ Search Smart</h3><p>Search using the exact role name plus “intern”, “fresher” or “entry level”. Check the job description before applying.</p></div>
+    <div class="tip"><h3>5️⃣ Track Applications</h3><p>Maintain a simple sheet with company, role, date applied, interview date, status and follow-up date.</p></div>
+    <div class="tip"><h3>6️⃣ Prepare Documents</h3><p>Keep your resume, certificates, marksheets, project details and a professional email ready in one folder.</p></div>
+    <div class="tip"><h3>7️⃣ Research the Company</h3><p>Before an interview, know what the company does, what the role involves and why you are interested.</p></div>
+    <div class="tip"><h3>8️⃣ Follow Up Professionally</h3><p>After an interview, a short polite follow-up message can show professionalism.</p></div>
+    <div class="tip"><h3>9️⃣ Watch for Scams</h3><p>Be cautious if a job asks for money, unusual personal information or payment for getting selected.</p></div>
+    <div class="tip"><h3>🔟 Keep Improving</h3><p>Use every application and interview as practice. Note what you can improve and try again.</p></div>
+  </div>
+</section>
+
+<section id="interview">
+  <h2 class="section-title">🎤 Interview Preparation</h2>
+  <p class="section-sub">Click a question to see what the interviewer is usually trying to understand and how to prepare.</p>
+
+  <details open><summary>👋 Tell me about yourself.</summary><p>Give a 45–90 second introduction: education → relevant skills → project/internship → career goal. Avoid telling your entire life story.</p></details>
+  <details><summary>🎯 Why do you want this job/internship?</summary><p>Connect the role with your interests, education and skills. Mention what you want to learn and contribute.</p></details>
+  <details><summary>⭐ What are your strengths?</summary><p>Choose 2–3 genuine strengths and give a short example, such as teamwork, communication, organization or Excel.</p></details>
+  <details><summary>🧩 What is your weakness?</summary><p>Choose a real but manageable area for improvement and explain what you are doing to improve it.</p></details>
+  <details><summary>🏢 Why do you want to join our company?</summary><p>Research the company first. Mention something specific about its work, role, learning opportunities or values.</p></details>
+  <details><summary>💼 Why should we hire you?</summary><p>Talk about relevant skills, willingness to learn, reliability and examples from projects, college work or internships.</p></details>
+  <details><summary>📚 You are a fresher. What experience do you have?</summary><p>Use academic projects, presentations, volunteering, competitions, internships, part-time work or self-learning as evidence of your skills.</p></details>
+  <details><summary>😰 How do you handle pressure or deadlines?</summary><p>Explain how you prioritize tasks, break work into smaller steps and communicate early if you need help.</p></details>
+  <details><summary>🤝 Tell me about a time you worked in a team.</summary><p>Use the STAR method: Situation, Task, Action and Result. Focus on your own contribution.</p></details>
+  <details><summary>⚡ Tell me about a problem you solved.</summary><p>Describe the problem, what you did, why you chose that approach and what happened afterward.</p></details>
+  <details><summary>📈 Where do you see yourself in 3–5 years?</summary><p>Show a realistic direction and a willingness to learn. Avoid giving an answer that sounds unrelated to the role.</p></details>
+  <details><summary>💰 What are your salary expectations?</summary><p>For a fresher, you can say you are open to the company's standard range for the role and that the learning opportunity is also important to you.</p></details>
+  <details><summary>❓ Do you have any questions for us?</summary><p>Good questions include: “What would my first few months look like?”, “What skills are most important for this role?” and “How is performance evaluated?”</p></details>
+
+  <div class="note"><strong>Interview rule:</strong> Be honest. If you do not know an answer, say so and explain how you would learn or find the answer.</div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">📚 Skill Development Roadmap</h2>
+  <p class="section-sub">You do not need to learn everything at once. Pick skills that match your target role.</p>
+  <div class="cards">
+    <div class="card"><h3>📊 MS Excel</h3><p>Learn formatting, sorting/filtering, IF, SUMIF/COUNTIF, XLOOKUP or VLOOKUP, PivotTables, charts and basic dashboards.</p></div>
+    <div class="card"><h3>📉 Data Analysis</h3><p>Learn how to clean data, find duplicates, handle inconsistent capitalization/spaces, summarize data and explain insights.</p></div>
+    <div class="card"><h3>🗣️ Communication</h3><p>Practice introductions, professional emails, presentations, active listening and explaining ideas in simple language.</p></div>
+    <div class="card"><h3>💻 Digital Skills</h3><p>Become comfortable with Word, PowerPoint, Google Docs/Sheets, file management and safe online practices.</p></div>
+    <div class="card"><h3>🤝 Teamwork</h3><p>Learn task planning, collaboration, giving updates, accepting feedback and solving disagreements respectfully.</p></div>
+    <div class="card"><h3>🧠 Problem Solving</h3><p>Practice breaking a large problem into smaller parts, identifying causes and comparing possible solutions.</p></div>
+    <div class="card"><h3>📋 Business Basics</h3><p>Understand basic HR, marketing, finance, sales, operations and business communication concepts.</p></div>
+    <div class="card"><h3>🎤 Presentation Skills</h3><p>Practice making simple slides, speaking confidently, using examples and answering questions.</p></div>
+    <div class="card"><h3>🔎 Research Skills</h3><p>Learn to find reliable information, compare sources, take notes and summarize findings without copying.</p></div>
+    <div class="card"><h3>🌐 Professional Online Presence</h3><p>Keep your LinkedIn, portfolio or project links updated and make sure your public profile looks professional.</p></div>
+  </div>
+</section>
+
+<section id="tips">
+  <h2 class="section-title">💡 Extra Career Tips for Students</h2>
+  <p class="section-sub">Small habits can make your internship and job search much easier.</p>
+  <div class="tip-grid">
+    <div class="tip"><h3>📝 Keep a Master Resume</h3><p>Store all your projects, certificates, achievements and skills in one master document. Create a shorter targeted version for applications.</p></div>
+    <div class="tip"><h3>📁 Organize Your Files</h3><p>Use folders such as Resume, Certificates, Projects, Marksheets and Applications so you can find documents quickly.</p></div>
+    <div class="tip"><h3>🎯 Set Weekly Goals</h3><p>For example: learn one Excel topic, apply to five suitable roles and practice three interview questions.</p></div>
+    <div class="tip"><h3>🔗 Build Projects</h3><p>Small practical projects can show employers what you can do even when you have little formal experience.</p></div>
+    <div class="tip"><h3>📧 Use a Professional Email</h3><p>Use a simple email address based on your name rather than a nickname when applying for jobs.</p></div>
+    <div class="tip"><h3>🕐 Be Punctual</h3><p>For classes, interviews, internships and meetings, aim to be ready a little early.</p></div>
+    <div class="tip"><h3>📖 Learn From Feedback</h3><p>When a teacher, mentor or interviewer gives useful feedback, write it down and work on it.</p></div>
+    <div class="tip"><h3>💬 Practice Professional English</h3><p>Read job descriptions and practice explaining your education, skills and projects clearly.</p></div>
+    <div class="tip"><h3>🛡️ Protect Personal Information</h3><p>Do not share passwords, OTPs or unnecessary sensitive information with recruiters or strangers.</p></div>
+    <div class="tip"><h3>🌱 Focus on Progress</h3><p>You do not need to be perfect before applying. Keep learning while gaining real experience.</p></div>
+    <div class="tip"><h3>📌 Read Job Descriptions Carefully</h3><p>Check required skills, responsibilities, location, work type and eligibility before applying.</p></div>
+    <div class="tip"><h3>🏆 Record Achievements</h3><p>Save measurable achievements such as project results, competition positions, event responsibilities or certificates.</p></div>
+  </div>
+</section>
+
+<footer>© 2026 Student Career Toolkit • Made for students & freshers</footer>
+
 <script>
-const ids=["name","email","phone","location","objective","education","skills","experience","projects","certifications","languages"];
-function update(){
- document.getElementById("pname").textContent=document.getElementById("name").value||"Your Name";
- document.getElementById("pcontact").textContent=[email.value,phone.value,location.value].filter(Boolean).join(" • ")||"Email • Phone • Location";
- ids.slice(4).forEach(id=>document.getElementById("p"+id).textContent=document.getElementById(id).value||"Not provided");
+const fields=["name","headline","email","phone","location","linkedin","objective","education","experience","skills","projects","certifications","languages","activities"];
+
+function updateResume(){
+  const val=id=>document.getElementById(id).value.trim();
+  document.getElementById("pname").textContent=val("name")||"Your Name";
+  document.getElementById("pheadline").textContent=val("headline")||"Student / Aspiring Professional";
+  const contact=[val("email"),val("phone"),val("location"),val("linkedin")].filter(Boolean);
+  document.getElementById("pcontact").textContent=contact.join(" • ")||"Email • Phone • Location";
+  const map={objective:"pobjective",education:"peducation",experience:"pexperience",skills:"pskills",projects:"pprojects",certifications:"pcertifications",languages:"planguages",activities:"pactivities"};
+  Object.keys(map).forEach(k=>document.getElementById(map[k]).textContent=val(k)||"Not provided");
 }
-ids.forEach(id=>document.getElementById(id).addEventListener("input",update));update();
+fields.forEach(id=>document.getElementById(id).addEventListener("input",updateResume));
+function clearResume(){
+  if(!confirm("Clear all resume information?")) return;
+  fields.forEach(id=>document.getElementById(id).value="");
+  updateResume();
+}
+updateResume();
+
+function calculateCGPA(){
+  const v=[...document.querySelectorAll(".gpa")].map(x=>parseFloat(x.value)).filter(x=>!isNaN(x));
+  const o=document.getElementById("cgpaResult");
+  if(!v.length){o.className="result";o.textContent="Please enter at least one semester GPA.";return}
+  if(v.some(x=>x<0||x>10)){o.className="result";o.textContent="GPA should be between 0 and 10.";return}
+  const cgpa=v.reduce((a,b)=>a+b,0)/v.length;
+  o.className="result good";
+  o.textContent="Your average CGPA is "+cgpa.toFixed(2)+" ("+v.length+" semester"+(v.length>1?"s":"")+")";
+}
+
+function calculateAttendance(){
+  const a=parseFloat(document.getElementById("attended").value);
+  const t=parseFloat(document.getElementById("totalClasses").value);
+  const g=parseFloat(document.getElementById("targetAttendance").value);
+  const o=document.getElementById("attendanceResult");
+  if(isNaN(a)||isNaN(t)||isNaN(g)||t<=0||a<0||a>t||g<0||g>100){
+    o.className="result";o.textContent="Please enter valid attendance values.";return;
+  }
+  const c=(a/t)*100;
+  if(c>=g){
+    o.className="result good";
+    o.textContent="Current attendance: "+c.toFixed(2)+"%. You have reached your target of "+g+"%.";
+    return;
+  }
+  if(g>=100){
+    o.className="result";o.textContent="A 100% target cannot be reached after a missed class.";return;
+  }
+  const needed=Math.ceil((g*t-100*a)/(100-g));
+  o.className="result";
+  o.textContent="Current attendance: "+c.toFixed(2)+"%. Attend at least "+needed+" more consecutive class"+(needed!==1?"es":"")+" to reach "+g+"%.";
+}
 </script>
-</body></html>
+</body>
+</html>
